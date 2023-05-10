@@ -20,3 +20,18 @@ Lastly, the berth fixture was designed to be as power conservative as possible. 
 The block diagram outlines the interactions between the different systems involved in our project. The cargo berth fixture, located on the left side of the diagram, houses the magnet, camera, and power supply. It interacts with the cargo bag through fiducial tracking and mating with the steel strike plate. TCP communication over a local hotspot connection allows the fixture to receive commands from our Python host. The fiducial tracking program saves position coordinates which the host uses to guide the user in adjusting the position of the cargo bag during the mating process. This allows a team member to physically manipulate the bag and guide it to the berth fixture.
 
 To simulate this process, we used a NASA-built simulation environment utilizing ROS and Gazebo. Our cargo berth fixture’s .urdf files and transform were added to the environment, allowing us to highlight the interaction between the fixture, robot, and bag in a virtual space.
+
+# 3D Model Diagram
+![Alt text](/model_diagram.png "Optional title")
+
+### 3.3.3 3D Modeling Diagram 
+
+The accompanying image displays a comprehensive breakdown of our model. The entire model was manufactured using 3D printing with PLA plastic and securely assembled with M4 inserts and machined screws. 
+
+To ensure optimal performance, we carefully placed the cameras at a considerable distance from the magnet to allow uninterrupted reading of the fiducial marker when the bag is fully installed, as depicted in balloons 9 and 19. 
+
+Balloon 1 illustrates the front plate of our cargo berth, which features precision cutouts specifically designed to accommodate the switch and magnet arrangement. These cutouts are prominently visible in balloons 5 and 13. Balloon 2 displays handles on either side of the AstroBerth, facilitating easy handling of the product. 
+
+Balloon 3 portrays the backplate of the AstroBerth, ingeniously housing our batteries. Our design further incorporates a goose neck design, illustrated in balloon 10, that enables facile maneuvering of the light sensor on top of the cargo berth around the cargo bags. 
+
+Finally, balloon 12 highlights the light sensor housing that encompasses our light sensor, specifically intended for deep sleep operation modes, reflecting our relentless pursuit of innovative solutions.
