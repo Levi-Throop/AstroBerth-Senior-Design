@@ -35,3 +35,17 @@ Balloon 1 illustrates the front plate of our cargo berth, which features precisi
 Balloon 3 portrays the backplate of the AstroBerth, ingeniously housing our batteries. Our design further incorporates a goose neck design, illustrated in balloon 10, that enables facile maneuvering of the light sensor on top of the cargo berth around the cargo bags. 
 
 Finally, balloon 12 highlights the light sensor housing that encompasses our light sensor, specifically intended for deep sleep operation modes, reflecting our relentless pursuit of innovative solutions.
+
+# State Diagram
+
+![Alt text](/state_diagram.png "Optional title")
+
+## 3.3.4 State Diagram 
+
+The state diagram above illustrates the different modes that the Astroberth can operate in and the transitions between them. The default mode of the Astroberth is the deep sleep mode, where the ESP32 is off, the magnet is holding the cargo, and the camera is off to conserve power. 
+
+When a signal is received from the Astrobee's flashlight, the ESP32 will transition into its active mode with the camera and fiducial tracking active. The Astroberth then waits to receive information about which mode it will be operating in, based on a signal sent from the Astrobee.
+
+If the berth fixture does not have a bag mounted, it will transition into the alignment mode, where the ESP will communicate with the Astrobee to use the camera and fiducial tracking to mount the bag. Once the bag is in a certain position, the docking mode is activated, and the berth waits for the switch on the bag to be active, indicating that the bag is mounted properly. After the bag is mounted properly, the ESP goes back into its deep sleep mode.
+
+If a cargo bag is already mounted, the bag will transition from its active mode to the removal mode. The removal mode will have the camera on to note the positioning of the bag, and the magnet will be released when the Astrobee is in position. The ESP applies a voltage to the circuit controlling the magnet, allowing the bag to drop. Once the bag is removed, indicated by the switch on the berth, the berth will go back into its deep sleep mode.
