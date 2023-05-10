@@ -94,3 +94,6 @@ The following use case diagrams illustrate the different steps involved in the d
 1. Astrobee initiates the undocking process by approaching the AstroBerth and activating its flashlight module.
 2. The AstroBerth releases the cargo bag, allowing the Astrobee to transport it to its intended location.
 3. After the undocking process is complete, the AstroBerth enters into a power-conserving deep sleep mode.
+
+# IRL AstroBerth (Senior Design Showcase Group 7)
+![Alt text](/group_photo.jpg "Optional title")
