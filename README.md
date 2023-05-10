@@ -49,3 +49,48 @@ When a signal is received from the Astrobee's flashlight, the ESP32 will transit
 If the berth fixture does not have a bag mounted, it will transition into the alignment mode, where the ESP will communicate with the Astrobee to use the camera and fiducial tracking to mount the bag. Once the bag is in a certain position, the docking mode is activated, and the berth waits for the switch on the bag to be active, indicating that the bag is mounted properly. After the bag is mounted properly, the ESP goes back into its deep sleep mode.
 
 If a cargo bag is already mounted, the bag will transition from its active mode to the removal mode. The removal mode will have the camera on to note the positioning of the bag, and the magnet will be released when the Astrobee is in position. The ESP applies a voltage to the circuit controlling the magnet, allowing the bag to drop. Once the bag is removed, indicated by the switch on the berth, the berth will go back into its deep sleep mode.
+
+# Magnet Circuit (Patent Pending)
+![Alt text](/magnet_circuit.png "Optional title")
+
+## 3.3.1 Magnet Circuit Diagram
+
+The magnet circuit diagram displays how the magnet is controlled by the ESP32. The circuit consists of a solenoid, a permanent magnet, a switch, and a battery. The switch represents the input pin of the ESP32 that delivers 3.3V when the bag removal mode is activated. 
+
+When the input pin is active, the voltage at the nodes of the circuit changes to allow the current from the battery to flow through the solenoid, which cancels out the magnetic field from the permanent magnet. This allows the magnet to release the cargo bag from the berth. 
+
+This circuit design is efficient as it only uses power when a bag needs to be removed from the berth.
+
+# Light Sensor Circuit
+![Alt text](/light_sensor_circuit.png "Optional title")
+
+## 3.3.2 Light Sensor Circuit Diagram 
+
+The light sensor circuit diagram depicts how a photoresistor and NPN transistor work together to trigger a signal to pass to the microprocessor whenever light shines onto the photoresistor. The circuit is designed to minimize its usage of current when the photoresistor is in the dark. 
+
+When light shines onto the photoresistor, its resistance drops, causing the transistor's state to flip and lower the voltage on the circuit by grounding it. The microprocessor, connected between the 330 Ohm resistor and the NPN transistor, is then able to register the signal dropping to low and exit its sleeping state to begin connection to the Astrobee.
+
+The photoresistor is housed in a metal gooseneck attached to the berth fixture, which positions it in a way that allows the Astrobee's flashlight to reach it, as depicted in the 3.3.4 use case diagrams.
+
+# Use Case 
+![Alt text](/concept_of_designs.png "Optional title")
+
+
+### 3.3.4 – 3.3.5 Use Case Diagrams 
+
+The following use case diagrams illustrate the different steps involved in the docking and undocking process between Astrobee and AstroBerth:
+
+#### Docking Use Case Diagram:
+
+1. Astrobee navigates through the International Space Station (ISS).
+2. Astrobee carries a cargo bag and determines the optimal location to mount it.
+3. Astrobee activates the AstroBerth by sending a wake-up signal using its flashlight.
+4. Astrobee uses fiducial tracking to guide the cargo bag into the precise mating position.
+5. The steel plate of the cargo bag magnetizes against the AstroBerth.
+6. Astrobee departs the scene, and the AstroBerth enters a power-saving deep sleep mode.
+
+#### Undocking Use Case Diagram:
+
+1. Astrobee initiates the undocking process by approaching the AstroBerth and activating its flashlight module.
+2. The AstroBerth releases the cargo bag, allowing the Astrobee to transport it to its intended location.
+3. After the undocking process is complete, the AstroBerth enters into a power-conserving deep sleep mode.
